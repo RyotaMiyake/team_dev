@@ -5,7 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Qestion extends Model
+class Question extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'title',
+        'question',
+    ];
+    public function getPaginateByLimit(int $limit_count = 10)
+{
+    // updated_atで降順に並べたあと、limitで件数制限をかける
+    return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+}
 }
