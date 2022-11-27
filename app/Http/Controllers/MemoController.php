@@ -74,10 +74,19 @@ class MemoController extends Controller
         return redirect('/memos/' . $memo->id);
     }
     
+
     public function delete(Memo $memo )
     {
         $memo->delete();
         return redirect('/');
     }
     
+
+    public function show_curriculum(Curriculum $curriculum, Memo $memo)
+    {
+        return view('memos/curriculum_index')->with([
+            'memos' => $memo->get(),
+            'curriculum' => $curriculum
+            ]);
+    }
 }

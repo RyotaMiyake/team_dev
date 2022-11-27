@@ -8,6 +8,8 @@ use App\Http\Controllers\MemoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
+use App\Models\Curriculum;
+use App\Http\Controllers\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function (Curriculum $curriculum) {
+    return view('dashboard')->with(['curricula' => $curriculum->get()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -36,6 +38,7 @@ Route::get('/memos/{memo}', [MemoController::class, 'show'])->name('memos.show')
 Route::put('/memos/{memo}', [MemoController::class, 'update'])->name('memos.update');
 Route::delete('/memos/{memo}', [MemoController::class, 'delete'])->name('memos.delete');
 Route::get('/memos/{memo}/edit', [MemoController::class, 'edit'])->name('memos.edit');
+Route::get('/curricula/{curriculum}', [MemoController::class, 'show_curriculum'])->name('memos.show_curriculum');
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('post.index');
@@ -61,6 +64,9 @@ Route::controller(QuestionController::class)->middleware(['auth'])->group(functi
     Route::get('/questions/{question}/edit', 'edit')->name('question.edit');
 });
 
+Route::controller(AnswerController::class)->middleware(['auth'])->group(function(){
+    Route::post('/questions/{question}', 'store')->name('answers.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
