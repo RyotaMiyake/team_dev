@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Http\Requests\QuestionRequest;
-
+use Cloudinary;
 
 
 class QuestionController extends Controller
@@ -33,6 +33,10 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request, Question $question)
     {
         $input = $request['question'];
+        $img = $request->file('image_url');
+        if ($img != null){
+            $question['image_url'] = Cloudinary::upload($img->getRealPath())->getSecurePath();
+        }
         $question->fill($input)->save();
         return redirect('/questions/'.$question->id);
     }
