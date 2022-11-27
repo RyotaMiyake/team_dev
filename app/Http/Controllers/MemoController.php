@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Curriculum;
 use App\Models\Comments;
 use Illuminate\Support\Facades\Auth;
+use Cloudinary;
 
 class MemoController extends Controller
 {
@@ -28,27 +29,59 @@ class MemoController extends Controller
 
     public function store(Memo $memo, Request $request)
     {
+        
+        $input = $request['memo'];
+        $img = $request->file('image_url');
+        if($img != null)
+        {
+            $memo['image_url'] = Cloudinary::upload($img->getRealPath())->getSecurePath();
+            
+        }
+        
         $memo->curriculum_id=$request['memo']['curriculum_id'];
         $memo->title=$request['memo']['title'];
         $memo->body=$request['memo']['body'];
         $memo->user_id=Auth::user()->id;
-        $memo->save();
+        $memo->fill($input)->save();
+        
+        
+        
         return redirect('/memos/' . $memo->id);
     }
 
-    public function edit(Memo $memo)
+    public function edit(Curriculum $curriculum, Memo $memo)
     {
-        return view('memos/edit')->with(['memo' => $memo]);
+        return view('memos/edit')->with(['curricula' => $curriculum->get(),'memo' => $memo]);
+                                        
     }
 
     public function update(Request $request, Memo $memo)
     {
-        $input_memo = $request['memo'];
-        $memo->fill($input_memo)->save();
-
+        $input = $request['memo'];
+        $img = $request->file('image_url');
+        if($img != null)
+        {
+            $memo['image_url'] = Cloudinary::upload($img->getRealPath())->getSecurePath();
+            
+        }
+        
+        $memo->curriculum_id=$request['memo']['curriculum_id'];
+        $memo->title=$request['memo']['title'];
+        $memo->body=$request['memo']['body'];
+        $memo->user_id=Auth::user()->id;
+        $memo->fill($input)->save();
+        
         return redirect('/memos/' . $memo->id);
     }
     
+
+    public function delete(Memo $memo )
+    {
+        $memo->delete();
+        return redirect('/');
+    }
+    
+
     public function show_curriculum(Curriculum $curriculum, Memo $memo)
     {
         return view('memos/curriculum_index')->with([

@@ -16,6 +16,7 @@
                 <h1>{{ $memo->title }}</h1>
                 <h1>{{ $memo->curriculum->curriculum }}</h1>
                 <a href="/memos/{{ $memo->user->id }}">{{ $memo->user->name }}</a>
+                <img src="{{ $memo->image_url }}"></a>
                 <a href="/memos/{{ $memo->id }}/edit">編集</a>
                 <div>
                     <h3>本文</h3>
@@ -23,7 +24,7 @@
                 </div>
             </div>
             <div class="footer">
-                <a href="/">戻る</a>
+                <a href="/memos">戻る</a>
             </div>
         </body>
     </html>

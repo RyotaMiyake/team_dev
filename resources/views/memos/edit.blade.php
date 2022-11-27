@@ -9,8 +9,8 @@
             <title>Blog</title>
         </head>
         <body>
-            <h1>備忘録作成</h1>
-            <form action="/memos" method="POST" enctype="multipart/form-data">
+            <h1>備忘録編集</h1>
+            <form action="/memos" method="PUT" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <h2>カリキュラム</h2>
@@ -20,13 +20,14 @@
                         @endforeach
                     </select>
                     <h2>タイトル</h2>
-                    <input type="text" name=memo[title] placeholder="タイトル" value="{{ old('memo.title') }}"/>
+                    <input type="text" name=memo[title] placeholder="タイトル" value="{{ $memo->title }}"/>
                     <p>{{ $errors->first('memo.title') }}</p>
                 </div>
                 <div>
                     <h2>内容</h2>
-                    <textarea name="memo[body]" placeholder="今日の学び">{{ old('memo.body') }}</textarea>
+                    <textarea name="memo[body]" placeholder="今日の学び">{{ $memo->body }}</textarea>
                     <p>{{ $errors->first('post.body') }}</p>
+                    <img src="{{ $memo->image_url }}"></a>
                 </div>
                 <div>
                     <input type="file" name="image_url">
