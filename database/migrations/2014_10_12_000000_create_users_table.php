@@ -20,8 +20,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('admission_id')->constrained('admissions');
-            $table->foreignId('progress_id')->constrained('curricula');
+            $table->foreignId('admission_id')->nullable()->constrained('admissions');
+            $table->foreignId('progress_id')->nullable()->constrained('curricula');
             $table->timestamps();
         });
     }

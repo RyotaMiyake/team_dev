@@ -20,7 +20,7 @@
                         <h1>
                             <a href="/memos/{{ $memo->id }}">{{ $memo->title }}</a>
                         </h1>
-                        <h1>{{ $memo->curriculum()->curriculum }}</h1>
+                        <h1>{{ $memo->curriculum->curriculum }}</h1>
                         <h1>{{ $memo->createdat }}</h1>
                     </div>
                     <form action="/memos/{{ $memo->id }}" id="form_{{ $memo->id }}" method="memo">

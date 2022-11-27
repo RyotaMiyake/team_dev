@@ -16,6 +16,7 @@ class Memo extends Model
         'curriculum_id',
         'title',
         'body',
+        'user_id',
     ];
     
     public function comments()   

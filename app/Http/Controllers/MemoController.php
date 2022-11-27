@@ -7,6 +7,7 @@ use App\Models\Memo;
 use App\Models\User;
 use App\Models\Curriculum;
 use App\Models\Comments;
+use Illuminate\Support\Facades\Auth;
 
 class MemoController extends Controller
 {
@@ -27,9 +28,12 @@ class MemoController extends Controller
 
     public function store(Memo $memo, Request $request)
     {
-        $input_memo = $request['memo'];
-        $memo->fill($input_memo)->save();
-        return redirect('/memos/' . $post->id);
+        $memo->curriculum_id=$request['memo']['curriculum_id'];
+        $memo->title=$request['memo']['title'];
+        $memo->body=$request['memo']['body'];
+        $memo->user_id=Auth::user()->id;
+        $memo->save();
+        return redirect('/memos/' . $memo->id);
     }
 
     public function edit(Memo $memo)

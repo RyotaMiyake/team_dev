@@ -14,8 +14,8 @@
         <body>
             <div>
                 <h1>{{ $memo->title }}</h1>
-                <h1>{{ $memo->curriculum()->curriculum }}</h1>
-                <a href="/memos/{{ $memo->user()->id }}">{{ $memo->user()->name }}</a>
+                <h1>{{ $memo->curriculum->curriculum }}</h1>
+                <a href="/memos/{{ $memo->user->id }}">{{ $memo->user->name }}</a>
                 <a href="/memos/{{ $memo->id }}/edit">編集</a>
                 <div>
                     <h3>本文</h3>
