@@ -18,22 +18,6 @@
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                　　解答一覧
-                    <div class='answers'>
-                        @foreach ($answers as $answer)
-                            @if($answer->question_id == $question->id)
-                                <div class='answer'>
-                                    <h2 class='body'>
-                                        {{ $answer->answer }} &ensp; (投稿者:{{ $answer->user->name }}) &ensp; (投稿日:{{ $answer->created_at }})
-                                    </h2>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
                     <form action="/questions/{{ $question->id }}" method="POST">
                         @csrf
                         <div class="answer">

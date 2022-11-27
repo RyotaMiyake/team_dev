@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Answer;
 use App\Http\Requests\QuestionRequest;
 use Cloudinary;
 
@@ -19,15 +20,15 @@ class QuestionController extends Controller
         
     }
     
-    public function show(Question $question)
+    public function show(Question $question, Answer $answer)
     {
-       return view('questions/show')->with(['questions'=> $question]);
+       return view('questions/show')->with(['question'=> $question, 'answers'=> $answer->get()]);
        "test";
     }
     
     public function create(Question $question)
     {
-        return view('questions/create')->with(['questions' => $question -> get()]);
+        return view('questions/create')->with(['question' => $question -> get()]);
     }
     
     public function store(QuestionRequest $request, Question $question)
@@ -38,7 +39,7 @@ class QuestionController extends Controller
             $question['image_url'] = Cloudinary::upload($img->getRealPath())->getSecurePath();
         }
         $question->fill($input)->save();
-        return redirect('/questions/'.$question->id);
+        return redirect('/questions');
     }
     
     public function edit(Question $question)
