@@ -9,6 +9,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Curriculum;
+use App\Http\Controllers\AnswerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +64,9 @@ Route::controller(QuestionController::class)->middleware(['auth'])->group(functi
     Route::get('/questions/{question}/edit', 'edit')->name('question.edit');
 });
 
+Route::controller(AnswerController::class)->middleware(['auth'])->group(function(){
+    Route::post('/questions/{question}', 'store')->name('answers.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

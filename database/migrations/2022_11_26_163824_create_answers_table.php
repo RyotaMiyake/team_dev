@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('question_id');
             $table->text('answer');
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
