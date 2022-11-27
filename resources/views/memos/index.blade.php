@@ -22,17 +22,18 @@
                         </h1>
                         <h1>{{ $memo->curriculum->curriculum }}</h1>
                         <h1>{{ $memo->createdat }}</h1>
+                        <img src="{{ $memo->image_url }}"></a>
                     </div>
-                    <form action="/memos/{{ $memo->id }}" id="form_{{ $memo->id }}" method="memo">
+                    <form action="/memos/{{ $memo->id }}" id="form_{{ $memo->id }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="button" onclick="deletememo({{ $memo->id }})">削除</button>
+                        <button type="button" onclick="deleteMemo({{ $memo->id }})">削除</button>
                     </form>
                 @endforeach
             </div>
             <a href="/memos/create" class="btn">備忘録作成</a>
             <script>
-                function deletePost(id) {
+                function deleteMemo(id) {
                     'use strict'
             
                     if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
