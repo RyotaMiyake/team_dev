@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Memo;
 use App\Models\User;
 use App\Models\Curriculum;
-use App\Models\Comments;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Cloudinary;
 
@@ -17,9 +17,9 @@ class MemoController extends Controller
         return view('memos/index')->with(['memos' => $memo->get()]);
     }
 
-    public function show(Memo $memo)
+    public function show(Memo $memo, Comment $comment)
     {
-        return view('memos/show')->with(['memo' => $memo]);
+        return view('memos/show')->with(['memo' => $memo, 'comments' => $comment->get()]);
     }
 
     public function create(Curriculum $curriculum)
@@ -78,7 +78,7 @@ class MemoController extends Controller
     public function delete(Memo $memo )
     {
         $memo->delete();
-        return redirect('/');
+        return redirect('/memo');
     }
     
 

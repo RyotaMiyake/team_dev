@@ -35,6 +35,6 @@
                     <a href="/dashboard">戻る</a>
                 </div>
             </div>
-        </body>
-    </html>
+        </div>
+    </div>
 </x-app-layout>

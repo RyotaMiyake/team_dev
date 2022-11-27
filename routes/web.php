@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Models\Curriculum;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +32,20 @@ Route::get('/dashboard', function (Curriculum $curriculum) {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/memos', [MemoController::class, 'index'])->name('memos.index');
-Route::post('/memos', [MemoController::class, 'store'])->name('memos.store');
-Route::get('/memos/create', [MemoController::class, 'create'])->name('memos.create');
-Route::get('/memos/{memo}', [MemoController::class, 'show'])->name('memos.show');
-Route::put('/memos/{memo}', [MemoController::class, 'update'])->name('memos.update');
-Route::delete('/memos/{memo}', [MemoController::class, 'delete'])->name('memos.delete');
-Route::get('/memos/{memo}/edit', [MemoController::class, 'edit'])->name('memos.edit');
-Route::get('/curricula/{curriculum}', [MemoController::class, 'show_curriculum'])->name('memos.show_curriculum');
+Route::controller(MemoController::class)->middleware(['auth'])->group(function(){
+    Route::get('/memos', 'index')->name('memos.index');
+    Route::post('/memos', 'store')->name('memos.store');
+    Route::get('/memos/create', 'create')->name('memos.create');
+    Route::get('/memos/{memo}', 'show')->name('memos.show');
+    Route::put('/memos/{memo}', 'update')->name('memos.update');
+    Route::delete('/memos/{memo}', 'delete')->name('memos.delete');
+    Route::get('/memos/{memo}/edit', 'edit')->name('memos.edit');
+    Route::get('/curricula/{curriculum}', 'show_curriculum')->name('memos.show_curriculum');
+});
+
+Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
+    Route::post('/memos/{memo}', 'store')->name('comments.store');
+});
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('post.index');
