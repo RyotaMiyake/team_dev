@@ -13,10 +13,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('トップページ') }}
                     </x-nav-link>
                     <x-nav-link :href="route('memos.index')" :active="request()->routeIs('memos.index')">
-                        {{ __('My_page') }}
+                        {{ __('マイページ') }}
                     </x-nav-link>
                     <x-nav-link :href="route('question.index')" :active="request()->routeIs('question.index')">
                         {{ __('Q&A') }}

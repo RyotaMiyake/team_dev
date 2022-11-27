@@ -23,9 +23,10 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function (Curriculum $curriculum) {
+    return view('dashboard')->with(['curricula' => $curriculum->get()]);
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('/dashboard', function (Curriculum $curriculum) {
     return view('dashboard')->with(['curricula' => $curriculum->get()]);
@@ -48,7 +49,7 @@ Route::controller(CommentController::class)->middleware(['auth'])->group(functio
 });
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
-    Route::get('/', 'index')->name('post.index');
+    //Route::get('/', 'index')->name('post.index');
     Route::post('/posts', 'store')->name('post.store');
     Route::get('/posts/create', 'create')->name('post.create');
     Route::get('/posts/{post}', 'show')->name('post.show');

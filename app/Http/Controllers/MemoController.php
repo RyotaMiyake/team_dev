@@ -78,7 +78,7 @@ class MemoController extends Controller
     public function delete(Memo $memo )
     {
         $memo->delete();
-        return redirect('/memo');
+        return redirect('/memos');
     }
     
 
