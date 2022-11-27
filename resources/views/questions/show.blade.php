@@ -13,6 +13,7 @@
                     <div class='question'>
                         <h2> {{ $question->title }} </h2>
                         <h2> {{ $question->question }} </h2>
+                        <img src="{{$question->image_url}}">
                     </div>
                 </div>
             </div>
@@ -25,6 +26,7 @@
                                 <div class='answer'>
                                     <h2 class='body'>
                                         {{ $answer->answer }} &ensp; (投稿者:{{ $answer->user->name }}) &ensp; (投稿日:{{ $answer->created_at }})
+                                        <img src="{{ $answer->image_url }}"></a>
                                     </h2>
                                 </div>
                             @endif
@@ -40,6 +42,13 @@
                             <h2>返信コメント</h2>
                             <textarea name="answer[answer]" placeholder="返信コメント">{{ old('answer.answer') }}</textarea>
                             <p class="answer__error" style="color:red">{{ $errors->first('answer.answer') }}</p>
+                            
+                            
+                            <div class="images">
+                                <input type="file"  name="image_url" >
+                                <p class="photos__error" style="color:red">{{ $errors->first('image') }}</p>
+                            </div>
+                                            
                         </div>
                         <x-primary-button class="ml-3">
                             {{ __('返信') }}

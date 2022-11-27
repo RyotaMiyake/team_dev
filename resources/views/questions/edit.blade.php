@@ -12,6 +12,7 @@
                         <h2>質問内容</h2>
                         <input type='text' name='question[question]' value="{{ $questions->question }}">
                         <p class="title__error" style="color:red">{{ $errors->first('question.question') }}</p>
+                        
                     </div>
                         <input type="submit" value="保存">
                     </form>
