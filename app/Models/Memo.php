@@ -12,6 +12,12 @@ class Memo extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'curriculum_id',
+        'title',
+        'body',
+    ];
+    
     public function comments()   
     {
         return $this->hasMany(Comment::class);  
