@@ -25,7 +25,7 @@
             <!-- 備忘録一覧 -->
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <p class='memos'>備忘録一覧</p> 
+                    <p class='memos'>備忘録一覧</p>
                     <div class='memos'>
                         @foreach ($memos as $memo)
                             @if ($memo->user_id == $memo->id)
