@@ -7,19 +7,25 @@
             </h2>
             </x-slot>
 <h1>Blog Name</h1>
-        <form action="/questions" method="POST">
+        <form action="/questions" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="title">
                 <h2>Title</h2>
-                <input type= "text" name = "question[title]" placeholder="タイトル" value ="{{ old('question.title') }}">
+                <input type= "text" name = "question[title]" placeholder="質問タイトル" value ="{{ old('question.title') }}">
                 <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
             </div>
             
             <div class="body">
                 <h2>Body</h2>
-                <textarea name="question[question]" placeholder="今日も1日お疲れさまでした。" >{{ old('question.question') }}</textarea>
+                <textarea name="question[question]" placeholder="質問内容投稿" >{{ old('question.question') }}</textarea>
                 <p class="question__error" style="color:red">{{ $errors->first('question.question') }}</p>
             </div>
+            
+            <div class="images">
+                <input type="file"  name="image_url" >
+                <p class="photos__error" style="color:red">{{ $errors->first('image') }}</p>
+            </div>
+            
             <input type="submit" value="送信"/>
         </form>
         <div class="footer">

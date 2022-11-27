@@ -25,19 +25,17 @@
                     <h2 class='questions'>
                         <a href="/questions/{{ $q->id }}">{{ $q->question }}</a>
                     </h2>
+                    <img src="{{ $q->image_url }}" alt="">
                 </div>
                
                 <form action="/questions/{{ $q->id }}" id="form_{{ $q->id }}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="button" onclick="deleteQuestion({{ $q->id }})">イベント削除</button>
+                <button type="button" onclick="deleteQuestion({{ $q->id }})">質問削除</button>
             </form>
             @endforeach
             
-            
-            
-            <a href='/questions/create'>イベント作成</a>
-            
+            <a href='/questions/create'>質問作成</a>
             
             <script>
                 function deleteQuestion(id) {
