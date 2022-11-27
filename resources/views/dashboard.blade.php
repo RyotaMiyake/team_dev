@@ -13,13 +13,22 @@
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         </head>
         <body>
-            <h1>カリキュラムごとの備忘録へジャンプ</h1>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h1 class="">カリキュラムごとの備忘録へジャンプ</h1>
+                </div>
+            </div>
+            
             <div>
-                @foreach ($curricula as $curriculum)  
-                    <div>
-                        <h1>
-                            <a href="/curricula/{{ $curriculum->id }}">{{ $curriculum->curriculum }}</a>
-                        </h1>
+                @foreach ($curricula as $curriculum)
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <div class="w-full">
+                                <h1 class="text-xl">
+                                    <a href="/curricula/{{ $curriculum->id }}">{{ $curriculum->curriculum }}</a>
+                                </h1>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
