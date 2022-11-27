@@ -15,6 +15,7 @@ class Answer extends Model
         'answer',
         'user_id',
         'question_id',
+        'image_url'
     ];
     
     public function user()
